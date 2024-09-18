@@ -5,7 +5,7 @@ import { Heart, Trash2, Play } from 'lucide-react'
 
 export default function FavoritesPage() {
   const [favorites, setFavorites] = useState([
-    { id: 1, name: 'Shape of You', artist: 'Ed Sheeran', album: '÷' },
+    { id: 1, name: 'Shape of You', artist: 'Ed Sheeran', album: '' },
     { id: 2, name: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', album: 'Uptown Special' },
     { id: 3, name: 'Someone Like You', artist: 'Adele', album: '21' },
   ])

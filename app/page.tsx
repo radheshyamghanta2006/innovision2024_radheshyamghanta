@@ -47,14 +47,14 @@ export default function Home() {
   return (
     <div className="space-y-8">
       <h1 
-        className={`text-4xl text-black font-bold transition-all duration-1000 ease-out ${
+        className={`text-4xl text-white font-bold transition-all duration-1000 ease-out ${
           welcomeVisible ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-10'
         }`}
       >
         Welcome to MusicStream
       </h1>
       <section>
-        <h2 className="text-2xl text-black font-semibold mb-4">Featured Playlists</h2>
+        <h2 className="text-2xl text-white font-semibold mb-4">Featured Playlists</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {playlists.map((playlist) => (
             <div 
@@ -99,7 +99,7 @@ export default function Home() {
         </div>
       </section>
       <section>
-        <h2 className="text-2xl text-black font-semibold mb-4">Browse by Genre</h2>
+        <h2 className="text-2xl text-white font-semibold mb-4">Browse by Genre</h2>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
           {genres.map((genre) => (
             <Link
