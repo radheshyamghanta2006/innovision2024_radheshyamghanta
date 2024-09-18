@@ -5,7 +5,7 @@ import { Search, Disc } from 'lucide-react'
 
 export default function SearchPage() {
   const [searchTerm, setSearchTerm] = useState('')
-  const [searchResults, setSearchResults] = useState([])
+  const [searchResults, setSearchResults] = useState<any>([])
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault()
