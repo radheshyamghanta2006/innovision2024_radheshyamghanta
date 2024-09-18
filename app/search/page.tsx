@@ -19,8 +19,8 @@ export default function SearchPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-3xl font-bold">Search for Music</h1>
-      <form onSubmit={handleSearch} className="flex gap-2">
+      <h1 className="text-3xl text-black font-bold">Search for Music</h1>
+      <form onSubmit={handleSearch} className="text-black flex gap-2 ">
         <input
           type="text"
           value={searchTerm}
