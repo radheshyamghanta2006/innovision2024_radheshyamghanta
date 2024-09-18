@@ -4,21 +4,21 @@ import { useState } from 'react'
 import { Heart, Trash2, Play } from 'lucide-react'
 
 export default function FavoritesPage() {
-  const [favorites, setFavorites] = useState([
+  const [favorites, setFavorites] = useState<any>([
     { id: 1, name: 'Shape of You', artist: 'Ed Sheeran', album: '' },
     { id: 2, name: 'Uptown Funk', artist: 'Mark Ronson ft. Bruno Mars', album: 'Uptown Special' },
     { id: 3, name: 'Someone Like You', artist: 'Adele', album: '21' },
   ])
 
   const removeFavorite = (id: number) => {
-    setFavorites(favorites.filter(fav => fav.id !== id))
+    setFavorites(favorites.filter((fav:any) => fav.id !== id))
   }
 
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold">Your Favorites</h1>
       <div className="space-y-4">
-        {favorites.map((favorite) => (
+        {favorites.map((favorite:any) => (
           <div key={favorite.id} className="bg-white p-4 rounded-lg shadow flex items-center space-x-4">
             <div className="bg-purple-100 rounded-full p-2">
               <Heart className="w-6 h-6 text-purple-600" />

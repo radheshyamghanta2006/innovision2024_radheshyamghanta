@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Search, Disc } from 'lucide-react'
 
 export default function SearchPage() {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState<string>('')
   const [searchResults, setSearchResults] = useState<any>([])
 
   const handleSearch = (e: React.FormEvent) => {
