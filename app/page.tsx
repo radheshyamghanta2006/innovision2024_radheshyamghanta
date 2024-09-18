@@ -1,11 +1,12 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Play, Pause } from 'lucide-react'
 
 const genres = [
-  { name: 'Pop', color: 'bg-pink-500' },
+  { name: 'Pop', color: 'bg-green-500' },
   { name: 'Rock', color: 'bg-red-500' },
   { name: 'Hip Hop', color: 'bg-yellow-500' },
   { name: 'Electronic', color: 'bg-blue-500' },
@@ -14,19 +15,34 @@ const genres = [
 ]
 
 const playlists = [
-  { id: 1, name: "Today's Top Hits", description: "The hottest tracks right now" },
-  { id: 2, name: "Chill Vibes", description: "Relax and unwind with these smooth tunes" },
-  { id: 3, name: "Workout Motivation", description: "High-energy songs to fuel your fitness" },
+  { id: 1, name: "Today's Top Hits", description: "The hottest tracks right now", imagePath: "/weekend.jpeg", song: "/hit.mp3" },
+  { id: 2, name: "Chill Vibes", description: "Relax and unwind with these smooth tunes", imagePath: "/chill.jpeg", song: "/chill.mp3" },
+  { id: 3, name: "Workout Motivation", description: "High-energy songs to fuel your fitness", imagePath: "/rock.jpeg", song: "/gym.mp3" },
 ]
 
 export default function Home() {
   const [activePlaylist, setActivePlaylist] = useState<number | null>(null)
   const [hoveredGenre, setHoveredGenre] = useState<string | null>(null)
   const [welcomeVisible, setWelcomeVisible] = useState(false)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   useEffect(() => {
     setWelcomeVisible(true)
   }, [])
+
+  const handlePlayPause = (playlistId: number) => {
+    if (activePlaylist === playlistId) {
+      audioRef.current?.pause()
+      setActivePlaylist(null)
+    } else {
+      if (audioRef.current) {
+        audioRef.current.pause()
+        audioRef.current.src = playlists.find(p => p.id === playlistId)?.song || ''
+        audioRef.current.play()
+      }
+      setActivePlaylist(playlistId)
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -47,7 +63,13 @@ export default function Home() {
                 activePlaylist === playlist.id ? 'scale-105 shadow-lg' : 'hover:scale-102'
               }`}
             >
-              <div className="h-40 bg-gradient-to-r from-purple-400 to-pink-500 relative overflow-hidden">
+              <div className="h-40 relative overflow-hidden">
+                <Image
+                  src={playlist.imagePath}
+                  alt={playlist.name}
+                  layout="fill"
+                  objectFit="cover"
+                />
                 <div 
                   className={`absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-opacity duration-300 ${
                     activePlaylist === playlist.id ? 'opacity-100' : 'opacity-0'
@@ -66,7 +88,7 @@ export default function Home() {
                 <p className="text-gray-600">{playlist.description}</p>
                 <button 
                   className="mt-4 bg-purple-600 text-white px-4 py-2 rounded-full flex items-center space-x-2 hover:bg-purple-700 transition-colors"
-                  onClick={() => setActivePlaylist(activePlaylist === playlist.id ? null : playlist.id)}
+                  onClick={() => handlePlayPause(playlist.id)}
                 >
                   {activePlaylist === playlist.id ? <Pause size={16} /> : <Play size={16} />}
                   <span>{activePlaylist === playlist.id ? 'Pause' : 'Play'}</span>
@@ -96,6 +118,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+      <audio ref={audioRef} />
     </div>
   )
 }
